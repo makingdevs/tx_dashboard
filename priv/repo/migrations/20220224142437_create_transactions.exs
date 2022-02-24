@@ -3,16 +3,16 @@ defmodule TxDashboard.Repo.Migrations.CreateTransactions do
 
   def change do
     create table(:transactions) do
-      add :type, :string
-      add :origin, :string
-      add :concept, :string
-      add :amount, :float
-      add :currency, :string
-      add :account_id, references(:accounts, on_delete: :nothing)
+      add(:type, :string)
+      add(:origin, :string)
+      add(:concept, :string)
+      add(:amount, :float)
+      add(:currency, :string)
+      add(:account_id, references(:accounts, on_delete: :nothing), null: false)
 
       timestamps()
     end
 
-    create index(:transactions, [:account_id])
+    create(index(:transactions, [:account_id]))
   end
 end
