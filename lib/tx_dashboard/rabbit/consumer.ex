@@ -2,6 +2,8 @@ defmodule TxDashboard.Consumer do
   use GenServer
   use AMQP
 
+  alias TxDashboard.TxWrapper
+
   def start_link(_opts) do
     GenServer.start_link(__MODULE__, [], [])
   end
@@ -25,8 +27,11 @@ defmodule TxDashboard.Consumer do
     {:noreply, chan}
   end
 
-  def handle_info({:basic_deliver, payload, %{delivery_tag: tag, redelivered: redelivered}}, chan) do
-    IO.inspect(binding())
+  def handle_info(
+        {:basic_deliver, payload, %{delivery_tag: tag, redelivered: _redelivered}},
+        chan
+      ) do
+    TxWrapper.wrap(payload)
     :ok = Basic.ack(chan, tag)
     {:noreply, chan}
   end
