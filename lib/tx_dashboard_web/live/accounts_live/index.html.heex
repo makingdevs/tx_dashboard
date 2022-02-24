@@ -1,0 +1,43 @@
+<h1>Listing Accounts</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.accounts_index_path(@socket, :index)}>
+    <.live_component
+      module={TxDashboardWeb.AccountsLive.FormComponent}
+      id={@accounts.id || :new}
+      title={@page_title}
+      action={@live_action}
+      accounts={@accounts}
+      return_to={Routes.accounts_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Lastname</th>
+      <th>Account</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="accounts">
+    <%= for accounts <- @accounts_collection do %>
+      <tr id={"accounts-#{accounts.id}"}>
+        <td><%= accounts.name %></td>
+        <td><%= accounts.lastname %></td>
+        <td><%= accounts.account %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.accounts_show_path(@socket, :show, accounts) %></span>
+          <span><%= live_patch "Edit", to: Routes.accounts_index_path(@socket, :edit, accounts) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: accounts.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Accounts", to: Routes.accounts_index_path(@socket, :new) %></span>

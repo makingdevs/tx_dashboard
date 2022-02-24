@@ -1,0 +1,36 @@
+<div>
+  <h2><%= @title %></h2>
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="transaction-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save">
+  
+    <%= label f, :type %>
+    <%= text_input f, :type %>
+    <%= error_tag f, :type %>
+  
+    <%= label f, :origin %>
+    <%= text_input f, :origin %>
+    <%= error_tag f, :origin %>
+  
+    <%= label f, :concept %>
+    <%= text_input f, :concept %>
+    <%= error_tag f, :concept %>
+  
+    <%= label f, :amount %>
+    <%= number_input f, :amount, step: "any" %>
+    <%= error_tag f, :amount %>
+  
+    <%= label f, :currency %>
+    <%= text_input f, :currency %>
+    <%= error_tag f, :currency %>
+  
+    <div>
+      <%= submit "Save", phx_disable_with: "Saving..." %>
+    </div>
+  </.form>
+</div>
