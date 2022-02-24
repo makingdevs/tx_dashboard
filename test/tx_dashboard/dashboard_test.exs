@@ -4,60 +4,65 @@ defmodule TxDashboard.DashboardTest do
   alias TxDashboard.Dashboard
 
   describe "accounts" do
-    alias TxDashboard.Dashboard.Accounts
+    alias TxDashboard.Dashboard.Account
 
     import TxDashboard.DashboardFixtures
 
     @invalid_attrs %{account: nil, lastname: nil, name: nil}
 
-    test "list_accounts/0 returns all accounts" do
-      accounts = accounts_fixture()
-      assert Dashboard.list_accounts() == [accounts]
+    test "list_account/0 returns all account" do
+      account = account_fixture()
+      assert Dashboard.list_account() == [account]
     end
 
-    test "get_accounts!/1 returns the accounts with given id" do
-      accounts = accounts_fixture()
-      assert Dashboard.get_accounts!(accounts.id) == accounts
+    test "get_account!/1 returns the account with given id" do
+      account = account_fixture()
+      assert Dashboard.get_account!(account.id) == account
     end
 
-    test "create_accounts/1 with valid data creates a accounts" do
+    test "create_account/1 with valid data creates a account" do
       valid_attrs = %{account: "some account", lastname: "some lastname", name: "some name"}
 
-      assert {:ok, %Accounts{} = accounts} = Dashboard.create_accounts(valid_attrs)
-      assert accounts.account == "some account"
-      assert accounts.lastname == "some lastname"
-      assert accounts.name == "some name"
+      assert {:ok, %Account{} = account} = Dashboard.create_account(valid_attrs)
+      assert account.account == "some account"
+      assert account.lastname == "some lastname"
+      assert account.name == "some name"
     end
 
-    test "create_accounts/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Dashboard.create_accounts(@invalid_attrs)
+    test "create_account/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Dashboard.create_account(@invalid_attrs)
     end
 
-    test "update_accounts/2 with valid data updates the accounts" do
-      accounts = accounts_fixture()
-      update_attrs = %{account: "some updated account", lastname: "some updated lastname", name: "some updated name"}
+    test "update_account/2 with valid data updates the account" do
+      account = account_fixture()
 
-      assert {:ok, %Accounts{} = accounts} = Dashboard.update_accounts(accounts, update_attrs)
-      assert accounts.account == "some updated account"
-      assert accounts.lastname == "some updated lastname"
-      assert accounts.name == "some updated name"
+      update_attrs = %{
+        account: "some updated account",
+        lastname: "some updated lastname",
+        name: "some updated name"
+      }
+
+      assert {:ok, %Account{} = account} = Dashboard.update_account(account, update_attrs)
+      assert account.account == "some updated account"
+      assert account.lastname == "some updated lastname"
+      assert account.name == "some updated name"
     end
 
-    test "update_accounts/2 with invalid data returns error changeset" do
-      accounts = accounts_fixture()
-      assert {:error, %Ecto.Changeset{}} = Dashboard.update_accounts(accounts, @invalid_attrs)
-      assert accounts == Dashboard.get_accounts!(accounts.id)
+    test "update_account/2 with invalid data returns error changeset" do
+      account = account_fixture()
+      assert {:error, %Ecto.Changeset{}} = Dashboard.update_account(account, @invalid_attrs)
+      assert account == Dashboard.get_account!(account.id)
     end
 
-    test "delete_accounts/1 deletes the accounts" do
-      accounts = accounts_fixture()
-      assert {:ok, %Accounts{}} = Dashboard.delete_accounts(accounts)
-      assert_raise Ecto.NoResultsError, fn -> Dashboard.get_accounts!(accounts.id) end
+    test "delete_account/1 deletes the account" do
+      account = account_fixture()
+      assert {:ok, %Account{}} = Dashboard.delete_account(account)
+      assert_raise Ecto.NoResultsError, fn -> Dashboard.get_account!(account.id) end
     end
 
-    test "change_accounts/1 returns a accounts changeset" do
-      accounts = accounts_fixture()
-      assert %Ecto.Changeset{} = Dashboard.change_accounts(accounts)
+    test "change_account/1 returns a account changeset" do
+      account = account_fixture()
+      assert %Ecto.Changeset{} = Dashboard.change_account(account)
     end
   end
 
@@ -79,7 +84,13 @@ defmodule TxDashboard.DashboardTest do
     end
 
     test "create_transaction/1 with valid data creates a transaction" do
-      valid_attrs = %{amount: 120.5, concept: "some concept", currency: "some currency", origin: "some origin", type: "some type"}
+      valid_attrs = %{
+        amount: 120.5,
+        concept: "some concept",
+        currency: "some currency",
+        origin: "some origin",
+        type: "some type"
+      }
 
       assert {:ok, %Transaction{} = transaction} = Dashboard.create_transaction(valid_attrs)
       assert transaction.amount == 120.5
@@ -95,9 +106,18 @@ defmodule TxDashboard.DashboardTest do
 
     test "update_transaction/2 with valid data updates the transaction" do
       transaction = transaction_fixture()
-      update_attrs = %{amount: 456.7, concept: "some updated concept", currency: "some updated currency", origin: "some updated origin", type: "some updated type"}
 
-      assert {:ok, %Transaction{} = transaction} = Dashboard.update_transaction(transaction, update_attrs)
+      update_attrs = %{
+        amount: 456.7,
+        concept: "some updated concept",
+        currency: "some updated currency",
+        origin: "some updated origin",
+        type: "some updated type"
+      }
+
+      assert {:ok, %Transaction{} = transaction} =
+               Dashboard.update_transaction(transaction, update_attrs)
+
       assert transaction.amount == 456.7
       assert transaction.concept == "some updated concept"
       assert transaction.currency == "some updated currency"
@@ -107,7 +127,10 @@ defmodule TxDashboard.DashboardTest do
 
     test "update_transaction/2 with invalid data returns error changeset" do
       transaction = transaction_fixture()
-      assert {:error, %Ecto.Changeset{}} = Dashboard.update_transaction(transaction, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Dashboard.update_transaction(transaction, @invalid_attrs)
+
       assert transaction == Dashboard.get_transaction!(transaction.id)
     end
 

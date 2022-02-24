@@ -12,14 +12,14 @@ defmodule TxDashboardWeb.LiveHelpers do
 
   ## Examples
 
-      <.modal return_to={Routes.accounts_index_path(@socket, :index)}>
+      <.modal return_to={Routes.account_index_path(@socket, :index)}>
         <.live_component
-          module={TxDashboardWeb.AccountsLive.FormComponent}
-          id={@accounts.id || :new}
+          module={TxDashboardWeb.AccountLive.FormComponent}
+          id={@account.id || :new}
           title={@page_title}
           action={@live_action}
-          return_to={Routes.accounts_index_path(@socket, :index)}
-          accounts: @accounts
+          return_to={Routes.account_index_path(@socket, :index)}
+          account: @account
         />
       </.modal>
   """

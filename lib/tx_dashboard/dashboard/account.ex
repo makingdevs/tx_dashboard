@@ -1,4 +1,4 @@
-defmodule TxDashboard.Dashboard.Accounts do
+defmodule TxDashboard.Dashboard.Account do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -14,8 +14,8 @@ defmodule TxDashboard.Dashboard.Accounts do
   end
 
   @doc false
-  def changeset(accounts, attrs) do
-    accounts
+  def changeset(account, attrs) do
+    account
     |> cast(attrs, [:name, :lastname, :account])
     |> validate_required([:name, :lastname, :account])
   end

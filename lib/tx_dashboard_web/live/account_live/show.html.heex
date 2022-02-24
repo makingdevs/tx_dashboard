@@ -1,0 +1,36 @@
+<h1>Show Account</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.account_show_path(@socket, :show, @account)}>
+    <.live_component
+      module={TxDashboardWeb.AccountLive.FormComponent}
+      id={@account.id}
+      title={@page_title}
+      action={@live_action}
+      account={@account}
+      return_to={Routes.account_show_path(@socket, :show, @account)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @account.name %>
+  </li>
+
+  <li>
+    <strong>Lastname:</strong>
+    <%= @account.lastname %>
+  </li>
+
+  <li>
+    <strong>Account:</strong>
+    <%= @account.account %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.account_show_path(@socket, :edit, @account), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.account_index_path(@socket, :index) %></span>

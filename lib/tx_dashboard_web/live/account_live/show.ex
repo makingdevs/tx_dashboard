@@ -1,4 +1,4 @@
-defmodule TxDashboardWeb.AccountsLive.Show do
+defmodule TxDashboardWeb.AccountLive.Show do
   use TxDashboardWeb, :live_view
 
   alias TxDashboard.Dashboard
@@ -13,9 +13,9 @@ defmodule TxDashboardWeb.AccountsLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:accounts, Dashboard.get_accounts!(id))}
+     |> assign(:account, Dashboard.get_account!(id))}
   end
 
-  defp page_title(:show), do: "Show Accounts"
-  defp page_title(:edit), do: "Edit Accounts"
+  defp page_title(:show), do: "Show Account"
+  defp page_title(:edit), do: "Edit Account"
 end

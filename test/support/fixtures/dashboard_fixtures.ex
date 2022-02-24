@@ -5,19 +5,19 @@ defmodule TxDashboard.DashboardFixtures do
   """
 
   @doc """
-  Generate a accounts.
+  Generate a account.
   """
-  def accounts_fixture(attrs \\ %{}) do
-    {:ok, accounts} =
+  def account_fixture(attrs \\ %{}) do
+    {:ok, account} =
       attrs
       |> Enum.into(%{
         account: "some account",
         lastname: "some lastname",
         name: "some name"
       })
-      |> TxDashboard.Dashboard.create_accounts()
+      |> TxDashboard.Dashboard.create_account()
 
-    accounts
+    account
   end
 
   @doc """

@@ -6,100 +6,100 @@ defmodule TxDashboard.Dashboard do
   import Ecto.Query, warn: false
   alias TxDashboard.Repo
 
-  alias TxDashboard.Dashboard.Accounts
+  alias TxDashboard.Dashboard.Account
 
   @doc """
-  Returns the list of accounts.
+  Returns the list of account.
 
   ## Examples
 
       iex> list_accounts()
-      [%Accounts{}, ...]
+      [%Account{}, ...]
 
   """
   def list_accounts do
-    Repo.all(Accounts)
+    Repo.all(Account)
   end
 
   @doc """
-  Gets a single accounts.
+  Gets a single account.
 
-  Raises `Ecto.NoResultsError` if the Accounts does not exist.
+  Raises `Ecto.NoResultsError` if the Account does not exist.
 
   ## Examples
 
-      iex> get_accounts!(123)
-      %Accounts{}
+      iex> get_account!(123)
+      %Account{}
 
-      iex> get_accounts!(456)
+      iex> get_account!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_accounts!(id), do: Repo.get!(Accounts, id)
+  def get_account!(id), do: Repo.get!(Account, id)
 
   @doc """
-  Creates a accounts.
+  Creates a account.
 
   ## Examples
 
-      iex> create_accounts(%{field: value})
-      {:ok, %Accounts{}}
+      iex> create_account(%{field: value})
+      {:ok, %Account{}}
 
-      iex> create_accounts(%{field: bad_value})
+      iex> create_account(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_accounts(attrs \\ %{}) do
-    %Accounts{}
-    |> Accounts.changeset(attrs)
+  def create_account(attrs \\ %{}) do
+    %Account{}
+    |> Account.changeset(attrs)
     |> Repo.insert()
   end
 
   @doc """
-  Updates a accounts.
+  Updates a account.
 
   ## Examples
 
-      iex> update_accounts(accounts, %{field: new_value})
-      {:ok, %Accounts{}}
+      iex> update_account(account, %{field: new_value})
+      {:ok, %Account{}}
 
-      iex> update_accounts(accounts, %{field: bad_value})
+      iex> update_account(account, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_accounts(%Accounts{} = accounts, attrs) do
-    accounts
-    |> Accounts.changeset(attrs)
+  def update_account(%Account{} = account, attrs) do
+    account
+    |> Account.changeset(attrs)
     |> Repo.update()
   end
 
   @doc """
-  Deletes a accounts.
+  Deletes a account.
 
   ## Examples
 
-      iex> delete_accounts(accounts)
-      {:ok, %Accounts{}}
+      iex> delete_account(account)
+      {:ok, %Account{}}
 
-      iex> delete_accounts(accounts)
+      iex> delete_account(account)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_accounts(%Accounts{} = accounts) do
-    Repo.delete(accounts)
+  def delete_account(%Account{} = account) do
+    Repo.delete(account)
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking accounts changes.
+  Returns an `%Ecto.Changeset{}` for tracking account changes.
 
   ## Examples
 
-      iex> change_accounts(accounts)
-      %Ecto.Changeset{data: %Accounts{}}
+      iex> change_account(account)
+      %Ecto.Changeset{data: %Account{}}
 
   """
-  def change_accounts(%Accounts{} = accounts, attrs \\ %{}) do
-    Accounts.changeset(accounts, attrs)
+  def change_account(%Account{} = account, attrs \\ %{}) do
+    Account.changeset(account, attrs)
   end
 
   alias TxDashboard.Dashboard.Transaction
