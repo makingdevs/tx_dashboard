@@ -18,7 +18,7 @@ defmodule TxDashboard.Dashboard.Transaction do
   def changeset(transaction, attrs) do
     transaction
     |> cast(attrs, [:type, :origin, :concept, :amount, :currency, :account_id])
-    |> validate_required([:type, :origin, :concept, :amount, :currency])
+    |> validate_required([:type, :origin, :concept, :amount, :currency, :account_id])
     |> foreign_key_constraint(:account_id)
   end
 end
