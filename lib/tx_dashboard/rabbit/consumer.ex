@@ -27,6 +27,7 @@ defmodule TxDashboard.Consumer do
 
   def handle_info({:basic_deliver, payload, %{delivery_tag: tag, redelivered: redelivered}}, chan) do
     IO.inspect(binding())
+    :ok = Basic.ack(chan, tag)
     {:noreply, chan}
   end
 end
