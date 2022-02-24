@@ -2,10 +2,13 @@ defmodule TxDashboard.Dashboard.Accounts do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias TxDashboard.Dashboard.Transaction
+
   schema "accounts" do
     field :account, :string
     field :lastname, :string
     field :name, :string
+    has_many :transactions, Transaction
 
     timestamps()
   end
