@@ -19,12 +19,12 @@ x  = ch.default_exchange
 
 json = """
 {
-  'account': '251678',
-	'type': {'withdraw': 'deposit'},
-  'origin': {'counter': 'transfer'},
-	'concept': 'Some snacks',
-	'amount': 3671.21,
-	'currency': 'MXN'
+  \"account\": \"251678\",
+	\"type\": {\"withdraw\": \"deposit\"},
+  \"origin\": {\"counter\": \"transfer\"},
+	\"concept\": \"Some snacks\",
+	\"amount\": 3671.21,
+	\"currency\": \"MXN\"
 }
 """
 
