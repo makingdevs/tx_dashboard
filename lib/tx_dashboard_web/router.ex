@@ -32,6 +32,8 @@ defmodule TxDashboardWeb.Router do
 
     live "/transactions/:id", TransactionLive.Show, :show
     live "/transactions/:id/show/edit", TransactionLive.Show, :edit
+
+    live "/balances/:account_number", BalancesLive.Index, :index
   end
 
   # Other scopes may use custom stacks.
