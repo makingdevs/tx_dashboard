@@ -1,6 +1,7 @@
 defmodule TxDashboard.Dashboard.Account do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
 
   alias TxDashboard.Dashboard.Transaction
 
@@ -20,5 +21,9 @@ defmodule TxDashboard.Dashboard.Account do
     account
     |> cast(attrs, [:name, :lastname, :account])
     |> validate_required([:name, :lastname, :account])
+  end
+
+  def find_by_account_number(account_number, query \\ __MODULE__) do
+    from query, where: [account: ^account_number]
   end
 end
