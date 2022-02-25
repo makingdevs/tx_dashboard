@@ -3,6 +3,8 @@ defmodule TxDashboard.Dashboard.Transaction do
   import Ecto.Changeset
   alias TxDashboard.Dashboard.Account
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "transactions" do
     field :amount, :float
     field :concept, :string

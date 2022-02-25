@@ -4,6 +4,8 @@ defmodule TxDashboard.Dashboard.Account do
 
   alias TxDashboard.Dashboard.Transaction
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "accounts" do
     field :account, :string
     field :lastname, :string
