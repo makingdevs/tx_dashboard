@@ -17,18 +17,20 @@ x  = ch.default_exchange
 #   puts "Received #{payload}"
 # end
 
-json = """
-{
-  \"account\": \"251678\",
-	\"type\": {\"withdraw\": \"deposit\"},
-  \"origin\": {\"counter\": \"transfer\"},
-	\"concept\": \"Some snacks\",
-	\"amount\": 3671.21,
-	\"currency\": \"MXN\"
-}
-"""
 
 [1,2,3,4,5].each do |i|
+  random_amount = rand(1000.00..3000.00)
+
+  json = """
+    {
+      \"account\": \"12345678\",
+      \"type\": \"deposit\",
+      \"origin\": \"transfer\",
+      \"concept\": \"Some snacks\",
+      \"amount\": #{random_amount},
+      \"currency\": \"MXN\"
+    }
+  """
 	x.publish(json, :routing_key => q.name)
 end
 
