@@ -16,11 +16,15 @@ defmodule TxDashboard.Dashboard.Transaction do
     timestamps()
   end
 
-  @doc false
   def changeset(transaction, attrs) do
     transaction
     |> cast(attrs, [:type, :origin, :concept, :amount, :currency, :account_id])
     |> validate_required([:type, :origin, :concept, :amount, :currency, :account_id])
     |> foreign_key_constraint(:account_id)
+  end
+
+  def for_account(%Account{} = account, params \\ %{}) do
+    account
+    |> Ecto.build_assoc(:transactions, params)
   end
 end

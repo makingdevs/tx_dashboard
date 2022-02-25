@@ -210,7 +210,7 @@ defmodule TxDashboard.Dashboard do
     account_number
     |> Account.find_by_account_number()
     |> Repo.one!()
-    |> Ecto.build_assoc(:transactions)
+    |> Transaction.for_account()
     |> change_transaction(params)
     |> Repo.insert!()
   end
