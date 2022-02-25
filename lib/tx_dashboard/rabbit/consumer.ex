@@ -31,12 +31,23 @@ defmodule TxDashboard.Consumer do
         {:basic_deliver, payload, %{delivery_tag: tag, redelivered: _redelivered}},
         chan
       ) do
-    spawn(fn ->
-      TxWrapper.wrap(payload)
-      |> TxDashboard.Dashboard.apply_transaction()
-    end)
+    _pid =
+      spawn(fn ->
+        TxWrapper.wrap(payload)
+        |> TxDashboard.Dashboard.apply_transaction()
+      end)
 
     :ok = Basic.ack(chan, tag)
     {:noreply, chan}
   end
+
+  # def handle_info({_ref, %TxDashboard.Dashboard.Transaction{} = _transaction}, chan) do
+  #   IO.inspect(binding())
+  #   {:noreply, chan}
+  # end
+
+  # def handle_info({:DOWN, _ref, :process, _pid, :normal}, chan) do
+  #   IO.inspect(binding())
+  #   {:noreply, chan}
+  # end
 end
