@@ -199,12 +199,12 @@ defmodule TxDashboard.Dashboard do
   end
 
   @doc """
-    account_number
+    account_number - String.t()
     |> Ecto.Query
     |> TxDashboard.Dashboard.Account
-    |> Transaction w/ID Account
+    |> TxDashboard.Dashboard.Transaction w/ID Account
     |> Changeset Transaction
-    |> Insert
+    |> Insert -> Transaction
   """
   def apply_transaction(%{"account" => account_number} = params) do
     account_number
