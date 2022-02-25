@@ -197,4 +197,21 @@ defmodule TxDashboard.Dashboard do
   def change_transaction(%Transaction{} = transaction, attrs \\ %{}) do
     Transaction.changeset(transaction, attrs)
   end
+
+  @doc """
+    account_number
+    |> Ecto.Query
+    |> TxDashboard.Dashboard.Account
+    |> Transaction w/ID Account
+    |> Changeset Transaction
+    |> Insert
+  """
+  def apply_transaction(%{"account" => account_number} = params) do
+    account_number
+    |> Account.find_by_account_number()
+    |> Repo.one!()
+    |> Ecto.build_assoc(:transactions)
+    |> change_transaction(params)
+    |> Repo.insert!()
+  end
 end
