@@ -1,0 +1,7 @@
+<h1>Balances for <%= @account_number %></h1>
+
+<p>
+<%= for tx <- @transactions do %>
+  <%= inspect tx %> <br>
+<% end %>
+</p>

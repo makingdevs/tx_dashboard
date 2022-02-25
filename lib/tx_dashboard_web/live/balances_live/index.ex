@@ -1,9 +1,11 @@
 defmodule TxDashboardWeb.BalancesLive.Index do
   use TxDashboardWeb, :live_view
 
-  def render(assigns) do
-    ~H"""
-    <h1>Hola inmundo</h1>
-    """
+  alias TxDashboard.Dashboard
+
+  @impl true
+  def mount(%{"account_number" => account_number} = _params, _session, socket) do
+    transactions = Dashboard.list_transactions()
+    {:ok, assign(socket, account_number: account_number, transactions: transactions)}
   end
 end
