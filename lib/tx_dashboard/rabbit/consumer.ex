@@ -31,7 +31,11 @@ defmodule TxDashboard.Consumer do
         {:basic_deliver, payload, %{delivery_tag: tag, redelivered: _redelivered}},
         chan
       ) do
-    TxWrapper.wrap(payload)
+    spawn(fn ->
+      TxWrapper.wrap(payload)
+      |> TxDashboard.Dashboard.apply_transaction()
+    end)
+
     :ok = Basic.ack(chan, tag)
     {:noreply, chan}
   end
