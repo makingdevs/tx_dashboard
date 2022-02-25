@@ -9,6 +9,8 @@ config :tx_dashboard, TxDashboard.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+config :tx_dashboard, :generators, binary_id: true
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
