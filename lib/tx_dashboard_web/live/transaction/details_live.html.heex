@@ -1,14 +1,14 @@
 <h1>Show Transaction</h1>
 
 <%= if @live_action in [:edit] do %>
-  <.modal return_to={Routes.transaction_show_path(@socket, :show, @transaction)}>
+  <.modal return_to={Routes.details_path(@socket, :show, @transaction)}>
     <.live_component
-      module={TxDashboardWeb.TransactionLive.FormComponent}
+      module={TxDashboardWeb.Transaction.Components.Form}
       id={@transaction.id}
       title={@page_title}
       action={@live_action}
       transaction={@transaction}
-      return_to={Routes.transaction_show_path(@socket, :show, @transaction)}
+      return_to={Routes.details_path(@socket, :show, @transaction)}
     />
   </.modal>
 <% end %>
@@ -42,5 +42,5 @@
 
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.transaction_show_path(@socket, :edit, @transaction), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.transaction_index_path(@socket, :index) %></span>
+<span><%= live_patch "Edit", to: Routes.details_path(@socket, :edit, @transaction), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.movements_path(@socket, :index) %></span>

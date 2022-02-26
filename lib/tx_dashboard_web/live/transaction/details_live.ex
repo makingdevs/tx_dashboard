@@ -1,4 +1,4 @@
-defmodule TxDashboardWeb.TransactionLive.Show do
+defmodule TxDashboardWeb.Transaction.DetailsLive do
   use TxDashboardWeb, :live_view
 
   alias TxDashboard.Dashboard

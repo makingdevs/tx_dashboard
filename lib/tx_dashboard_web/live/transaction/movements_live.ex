@@ -1,4 +1,4 @@
-defmodule TxDashboardWeb.TransactionLive.Index do
+defmodule TxDashboardWeb.Transaction.MovementsLive do
   use TxDashboardWeb, :live_view
 
   alias TxDashboard.Dashboard
