@@ -19,19 +19,19 @@ defmodule TxDashboardWeb.Router do
 
     get "/", PageController, :index
 
-    live "/accounts", AccountLive.Index, :index
-    live "/accounts/new", AccountLive.Index, :new
-    live "/accounts/:id/edit", AccountLive.Index, :edit
+    live "/accounts", Account.AccountsLive, :index
+    live "/accounts/new", Account.AccountsLive, :new
+    live "/accounts/:id/edit", Account.AccountsLive, :edit
 
-    live "/accounts/:id", AccountLive.Show, :show
-    live "/accounts/:id/show/edit", AccountLive.Show, :edit
+    live "/accounts/:id", Account.SummaryLive, :show
+    live "/accounts/:id/show/edit", Account.SummaryLive, :edit
 
-    live "/transactions", TransactionLive.Index, :index
-    live "/transactions/new", TransactionLive.Index, :new
-    live "/transactions/:id/edit", TransactionLive.Index, :edit
+    live "/transactions", Transaction.MovementsLive, :index
+    live "/transactions/new", Transaction.MovementsLive, :new
+    live "/transactions/:id/edit", Transaction.MovementsLive, :edit
 
-    live "/transactions/:id", TransactionLive.Show, :show
-    live "/transactions/:id/show/edit", TransactionLive.Show, :edit
+    live "/transactions/:id", Transaction.DetailsLive, :show
+    live "/transactions/:id/show/edit", Transaction.DetailsLive, :edit
 
     live "/balances/:account_number", BalancesLive.Index, :index
   end
