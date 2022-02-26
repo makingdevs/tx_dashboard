@@ -1,7 +1,29 @@
 <h1>Balances for <%= @account_number %></h1>
 
-<p>
-<%= for tx <- @transactions do %>
-  <%= inspect tx %> <br>
-<% end %>
-</p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Origin</th>
+      <th>Concept</th>
+      <th>Amount</th>
+      <th>Currency</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="transactions">
+    <%= for transaction <- @transactions do %>
+      <tr id={"transaction-#{transaction.id}"}>
+        <td><%= transaction.type %></td>
+        <td><%= transaction.origin %></td>
+        <td><%= transaction.concept %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.currency %></td>
+
+        <td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
