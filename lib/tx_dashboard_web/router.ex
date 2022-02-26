@@ -33,7 +33,7 @@ defmodule TxDashboardWeb.Router do
     live "/transactions/:id", Transaction.DetailsLive, :show
     live "/transactions/:id/show/edit", Transaction.DetailsLive, :edit
 
-    live "/balances/:account_number", BalancesLive.Index, :index
+    live "/balances/:account_number", Balances.AccountStatusLive, :index
   end
 
   # Other scopes may use custom stacks.
