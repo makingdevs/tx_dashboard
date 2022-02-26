@@ -3,10 +3,11 @@ defmodule TxDashboard.Dashboard do
   The Dashboard context.
   """
 
-  import Ecto.Query, warn: false
   alias TxDashboard.Repo
-
   alias TxDashboard.Dashboard.Account
+  alias TxDashboard.Dashboard.Transaction
+
+  @topic "transactions"
 
   @doc """
   Returns the list of account.
@@ -101,8 +102,6 @@ defmodule TxDashboard.Dashboard do
   def change_account(%Account{} = account, attrs \\ %{}) do
     Account.changeset(account, attrs)
   end
-
-  alias TxDashboard.Dashboard.Transaction
 
   @doc """
   Returns the list of transactions.
@@ -213,5 +212,10 @@ defmodule TxDashboard.Dashboard do
     |> Transaction.for_account()
     |> change_transaction(params)
     |> Repo.insert!()
+    |> push_tx(account_number)
+  end
+
+  defp push_tx(%Transaction{} = transaction, account_number) do
+    Phoenix.PubSub.broadcast(TxDashboard.PubSub, @topic <> ":" <> account_number, transaction)
   end
 end
