@@ -1,4 +1,4 @@
-defmodule TxDashboardWeb.AccountLive.FormComponent do
+defmodule TxDashboardWeb.Account.Components.Form do
   use TxDashboardWeb, :live_component
 
   alias TxDashboard.Dashboard

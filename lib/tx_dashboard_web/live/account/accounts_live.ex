@@ -1,4 +1,4 @@
-defmodule TxDashboardWeb.AccountLive.Index do
+defmodule TxDashboardWeb.Account.AccountsLive do
   use TxDashboardWeb, :live_view
 
   alias TxDashboard.Dashboard

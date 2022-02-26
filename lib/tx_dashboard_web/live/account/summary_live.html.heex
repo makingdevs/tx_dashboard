@@ -1,14 +1,14 @@
 <h1>Show Account</h1>
 
 <%= if @live_action in [:edit] do %>
-  <.modal return_to={Routes.account_show_path(@socket, :show, @account)}>
+  <.modal return_to={Routes.summary_path(@socket, :show, @account)}>
     <.live_component
-      module={TxDashboardWeb.AccountLive.FormComponent}
+      module={TxDashboardWeb.Account.Components.Form}
       id={@account.id}
       title={@page_title}
       action={@live_action}
       account={@account}
-      return_to={Routes.account_show_path(@socket, :show, @account)}
+      return_to={Routes.summary_path(@socket, :show, @account)}
     />
   </.modal>
 <% end %>
@@ -32,5 +32,5 @@
 
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.account_show_path(@socket, :edit, @account), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.account_index_path(@socket, :index) %></span>
+<span><%= live_patch "Edit", to: Routes.summary_path(@socket, :edit, @account), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.accounts_path(@socket, :index) %></span>

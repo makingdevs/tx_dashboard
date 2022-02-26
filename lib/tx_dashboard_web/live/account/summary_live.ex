@@ -1,4 +1,4 @@
-defmodule TxDashboardWeb.AccountLive.Show do
+defmodule TxDashboardWeb.Account.SummaryLive do
   use TxDashboardWeb, :live_view
 
   alias TxDashboard.Dashboard
