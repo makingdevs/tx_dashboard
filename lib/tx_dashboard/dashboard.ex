@@ -117,6 +117,33 @@ defmodule TxDashboard.Dashboard do
   end
 
   @doc """
+  Return a list of transactions for account number
+
+  ## Examples
+
+      iex> list_transactions_by_account("12345678")
+      [%Transaction{}, ...]
+
+  """
+  # @spec list_transactions_by_account(integer() | String.t()) :: [%Transaction{}, ...]
+  # @spec list_transactions_by_account(integer() | String.t()) :: page_spec()
+  @spec list_transactions_by_account(integer() | String.t()) :: map()
+  def list_transactions_by_account(account_number) do
+    page =
+      account_number
+      |> Transaction.transactions_for_account()
+      |> Repo.paginate(page_size: 5)
+
+    %{
+      entries: page.entries,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    }
+  end
+
+  @doc """
   Gets a single transaction.
 
   Raises `Ecto.NoResultsError` if the Transaction does not exist.
