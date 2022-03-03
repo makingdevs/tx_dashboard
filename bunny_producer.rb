@@ -23,7 +23,7 @@ x  = ch.default_exchange
 
   json = """
     {
-      \"account\": \"12345678\",
+      \"account\": \"#{ARGV[0]}\",
       \"type\": \"deposit\",
       \"origin\": \"transfer\",
       \"concept\": \"Some snacks\",
