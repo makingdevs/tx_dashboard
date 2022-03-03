@@ -7,6 +7,14 @@ defmodule TxDashboard.Dashboard do
   alias TxDashboard.Dashboard.Account
   alias TxDashboard.Dashboard.Transaction
 
+  @type page_spec :: %{
+          entries: [%Transaction{}, ...],
+          page_number: integer(),
+          page_size: integer(),
+          total_pages: integer(),
+          total_entries: integer()
+        }
+
   @topic "transactions"
 
   @doc """
@@ -122,12 +130,12 @@ defmodule TxDashboard.Dashboard do
   ## Examples
 
       iex> list_transactions_by_account("12345678")
-      [%Transaction{}, ...]
+      %{entries: 1, page_number: 1, page_size: 1, total_pages: 1, total_entries: [%Transaction{}]}
 
   """
   # @spec list_transactions_by_account(integer() | String.t()) :: [%Transaction{}, ...]
-  # @spec list_transactions_by_account(integer() | String.t()) :: page_spec()
-  @spec list_transactions_by_account(integer() | String.t()) :: map()
+  @spec list_transactions_by_account(integer() | String.t()) :: page_spec()
+  # @spec list_transactions_by_account(integer() | String.t()) :: map()
   def list_transactions_by_account(account_number) do
     page =
       account_number
