@@ -8,8 +8,7 @@
       <th>Concept</th>
       <th>Amount</th>
       <th>Currency</th>
-
-      <th></th>
+      <th>Operation time</th>
     </tr>
   </thead>
   <tbody id="transactions">
@@ -20,10 +19,17 @@
         <td><%= transaction.concept %></td>
         <td><%= transaction.amount %></td>
         <td><%= transaction.currency %></td>
-
-        <td>
-        </td>
+        <td><%= transaction.inserted_at %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<br> <%= inspect @page.page_number %>
+<br> <%= inspect @page.page_size %>
+<br> <%= inspect @page.total_entries %>
+<br> <%= inspect @page.total_pages %>
+
+<%=  for e <- 1..@page.total_pages do %>
+  <button {[phx_click: "page_number", phx_value_page_number: e]}><%= e %></button>
+<% end %>
