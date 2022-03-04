@@ -23,6 +23,8 @@ defmodule TxDashboardWeb.Router do
     live "/accounts/new", Account.AccountsLive, :new
     live "/accounts/:id/edit", Account.AccountsLive, :edit
 
+    live "/accounts/new_customer", Account.NewCustomerLive, :index
+
     live "/accounts/:id", Account.SummaryLive, :show
     live "/accounts/:id/show/edit", Account.SummaryLive, :edit
 
