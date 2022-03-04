@@ -1,1 +1,16 @@
 <h1>Hola mundo</h1>
+<.form let={f} for={@changeset} phx-change="validate" phx-submit="save">
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+  <%= label f, :lastname %>
+  <%= text_input f, :lastname %>
+  <%= error_tag f, :lastname %>
+  <%= label f, :account %>
+  <%= text_input f, :account %>
+  <%= error_tag f, :account %>
+
+  <%= submit "Save" %>
+  <button phx-click="generic_click" >Event</button>
+</.form>
+<h3>Summary: <%= summary(@account) %> </h3>
