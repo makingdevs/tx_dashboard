@@ -25,16 +25,8 @@ defmodule TxDashboardWeb.Balances.AccountStatusLive do
     {:ok, socket}
   end
 
-  # def handle_params() do
-  # end
-
   @impl true
-  def handle_event("page_number", %{"page-number" => _page_number}, socket) do
-    {:noreply, socket}
-  end
-
-  @impl true
-  def handle_event("page_size", %{"page-size" => page_size}, socket) do
+  def handle_params(%{"page_size" => page_size} = _params, _uri, socket) do
     %{entries: transactions} =
       Dashboard.list_transactions_by_account(socket.assigns.account_number, page_size: page_size)
 
@@ -42,6 +34,11 @@ defmodule TxDashboardWeb.Balances.AccountStatusLive do
       socket
       |> assign(:transactions, transactions)
 
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("page_number", %{"page-number" => _page_number}, socket) do
     {:noreply, socket}
   end
 
