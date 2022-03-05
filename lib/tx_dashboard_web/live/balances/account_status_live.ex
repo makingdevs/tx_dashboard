@@ -5,6 +5,7 @@ defmodule TxDashboardWeb.Balances.AccountStatusLive do
   alias TxDashboard.Dashboard.Transaction
 
   @topic "transactions"
+  @size_pages [5, 10, 15]
 
   @impl true
   def mount(%{"account_number" => account_number} = _params, _session, socket) do
@@ -12,15 +13,35 @@ defmodule TxDashboardWeb.Balances.AccountStatusLive do
 
     %{entries: transactions} = page = Dashboard.list_transactions_by_account(account_number)
 
-    {:ok, assign(socket, account_number: account_number, transactions: transactions, page: page)}
+    socket =
+      socket
+      |> assign(
+        account_number: account_number,
+        transactions: transactions,
+        page: page,
+        size_pages: @size_pages
+      )
+
+    {:ok, socket}
   end
 
   # def handle_params() do
   # end
 
   @impl true
-  def handle_event("page_number", %{"page-number" => page_number}, socket) do
-    IO.inspect(binding())
+  def handle_event("page_number", %{"page-number" => _page_number}, socket) do
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("page_size", %{"page-size" => page_size}, socket) do
+    %{entries: transactions} =
+      Dashboard.list_transactions_by_account(socket.assigns.account_number, page_size: page_size)
+
+    socket =
+      socket
+      |> assign(:transactions, transactions)
+
     {:noreply, socket}
   end
 
