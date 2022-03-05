@@ -3,7 +3,7 @@
   Page size:
 
   <%=  for e <- @size_pages do %>
-    <a href="#" {[phx_click: "page_size", phx_value_page_size: e]}><%= e %></a>
+    <%= live_patch "#{e}", to: Routes.account_status_path(@socket, :index, @account_number, page_size: e)  %>
   <% end %>
 </div>
 
