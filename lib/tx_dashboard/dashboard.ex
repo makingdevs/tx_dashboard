@@ -134,13 +134,13 @@ defmodule TxDashboard.Dashboard do
 
   """
   # @spec list_transactions_by_account(integer() | String.t()) :: [%Transaction{}, ...]
-  @spec list_transactions_by_account(integer() | String.t()) :: page_spec()
+  @spec list_transactions_by_account(integer() | String.t(), list()) :: page_spec()
   # @spec list_transactions_by_account(integer() | String.t()) :: map()
-  def list_transactions_by_account(account_number) do
+  def list_transactions_by_account(account_number, page_params \\ [page_size: 5]) do
     page =
       account_number
       |> Transaction.transactions_for_account()
-      |> Repo.paginate(page_size: 5)
+      |> Repo.paginate(page_params)
 
     %{
       entries: page.entries,
