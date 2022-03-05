@@ -16,7 +16,18 @@ defmodule TxDashboardWeb.Account.NewCustomerLive do
       Dashboard.change_account(%Account{}, account)
       |> Map.put(:action, :insert)
 
-    {:noreply, assign(socket, changeset: changeset, account: account)}
+    socket =
+      socket
+      |> assign(
+        changeset: changeset,
+        account: account
+      )
+
+    socket =
+      socket
+      |> assign(changeset: changeset)
+
+    {:noreply, socket}
   end
 
   @impl true
