@@ -1,4 +1,11 @@
 <h1>Balances for <%= @account_number %></h1>
+<div>
+  Page size:
+
+  <%=  for e <- @size_pages do %>
+    <a href="#" {[phx_click: "page_size", phx_value_page_size: e]}><%= e %></a>
+  <% end %>
+</div>
 
 <table>
   <thead>
@@ -25,11 +32,6 @@
   </tbody>
 </table>
 
-<br> <%= inspect @page.page_number %>
-<br> <%= inspect @page.page_size %>
-<br> <%= inspect @page.total_entries %>
-<br> <%= inspect @page.total_pages %>
-
 <%=  for e <- 1..@page.total_pages do %>
-  <button {[phx_click: "page_number", phx_value_page_number: e]}><%= e %></button>
+  <a href="#" {[phx_click: "page_number", phx_value_page_number: e]}><%= e %></a>
 <% end %>
