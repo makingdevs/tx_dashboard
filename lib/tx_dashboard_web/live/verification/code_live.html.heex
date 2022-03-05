@@ -1,0 +1,9 @@
+<div>
+  <%= for d <- @digits do %>
+    <h1 phx-click="a_digit"><%= d %></h1>
+  <% end %>
+</div>
+<h1>|</h1>
+<div>
+  <input type="text" name="code" phx-keyup="capture" style="color: white;">
+</div>
