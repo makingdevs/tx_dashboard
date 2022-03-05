@@ -38,7 +38,8 @@ defmodule TxDashboardWeb.Balances.AccountStatusLive do
   end
 
   @impl true
-  def handle_event("page_number", %{"page-number" => _page_number}, socket) do
+  def handle_event("page_number", %{"page-number" => page_number}, socket) do
+    IO.inspect(page_number)
     {:noreply, socket}
   end
 

@@ -32,6 +32,16 @@
   </tbody>
 </table>
 
-<%=  for e <- 1..@page.total_pages do %>
-  <a href="#" {[phx_click: "page_number", phx_value_page_number: e]}><%= e %></a>
-<% end %>
+<div>
+  Total records: <%= @page.total_entries %>
+</div>
+
+<div>
+  <%= for e <- 1..@page.total_pages do %>
+    <%= if @page.page_number == e do %>
+      <%= e %>
+    <% else %>
+      <a href="#" {[phx_click: "page_number", phx_value_page_number: e]}><%= e %></a>
+    <% end %>
+  <% end %>
+</div>

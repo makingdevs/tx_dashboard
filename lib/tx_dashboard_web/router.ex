@@ -8,6 +8,7 @@ defmodule TxDashboardWeb.Router do
     plug :put_root_layout, {TxDashboardWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    # plug :cipher_url
   end
 
   pipeline :api do
