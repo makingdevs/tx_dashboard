@@ -6,6 +6,7 @@ defmodule TxDashboardWeb.Account.NewCustomerLive do
 
   @impl true
   def mount(_params, _session, socket) do
+    IO.inspect(self(), label: __MODULE__)
     changeset = Dashboard.change_account(%Account{}, %{})
     {:ok, assign(socket, changeset: changeset, account: %{})}
   end
@@ -49,14 +50,4 @@ defmodule TxDashboardWeb.Account.NewCustomerLive do
 
     {:noreply, assign(state, changeset: changeset, account: account)}
   end
-
-  defp summary(%{"name" => name, "lastname" => lastname, "account" => account}) do
-    name
-    |> Kernel.<>(" ")
-    |> Kernel.<>(lastname)
-    |> Kernel.<>(" ")
-    |> Kernel.<>(account)
-  end
-
-  defp summary(_), do: ""
 end

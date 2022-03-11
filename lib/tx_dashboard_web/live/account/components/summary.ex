@@ -3,6 +3,8 @@ defmodule TxDashboardWeb.Account.Components.Summary do
 
   @impl true
   def mount(socket) do
+    IO.inspect(self(), label: __MODULE__)
+
     socket =
       socket
       |> assign(name: "", lastname: "", account: "")
