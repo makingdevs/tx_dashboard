@@ -20,14 +20,10 @@
   </thead>
   <tbody id="transactions">
     <%= for transaction <- @transactions do %>
-      <tr id={"transaction-#{transaction.id}"}>
-        <td><%= transaction.type %></td>
-        <td><%= transaction.origin %></td>
-        <td><%= transaction.concept %></td>
-        <td><%= transaction.amount %></td>
-        <td><%= transaction.currency %></td>
-        <td><%= transaction.inserted_at %></td>
-      </tr>
+      <.live_component
+         module={TxDashboardWeb.Balances.Components.Transaction}
+         id={"transaction-#{transaction.id}"}
+         transaction={transaction} />
     <% end %>
   </tbody>
 </table>
