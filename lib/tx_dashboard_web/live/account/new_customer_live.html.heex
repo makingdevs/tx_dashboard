@@ -13,4 +13,5 @@
   <%= submit "Save" %>
   <button phx-click="generic_click" >Event</button>
 </.form>
-<h3>Summary: <%= summary(@account) %> </h3>
+
+<.live_component module={TxDashboardWeb.Account.Components.Summary} id="summary"account={@account} />
