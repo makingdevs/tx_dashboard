@@ -29,4 +29,10 @@ defmodule TxDashboardWeb.Account.Components.Summary do
   def update(_assigns, socket) do
     {:ok, socket}
   end
+
+  @impl true
+  def handle_event("some-event", _params, socket) do
+    IO.inspect(binding(), label: "SOME_EVENT")
+    {:noreply, socket}
+  end
 end
