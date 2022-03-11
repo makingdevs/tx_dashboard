@@ -37,6 +37,12 @@ defmodule TxDashboardWeb.Balances.AccountStatusLive do
     {:noreply, socket}
   end
 
+  def handle_params(params, uri, socket) do
+    params
+    |> Map.put("page_size", 5)
+    |> handle_params(uri, socket)
+  end
+
   @impl true
   def handle_event("page_number", %{"page-number" => page_number}, socket) do
     IO.inspect(page_number)
