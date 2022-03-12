@@ -42,5 +42,43 @@
 
 </ul>
 
+<form id="upload-form" phx-submit="save" phx-change="validate">
+  <%= live_file_input @uploads.document %>
+  <button type="submit">Upload</button>
+</form>
+
+<section phx-drop-target={@uploads.document.ref}>
+  <h2> drag </h2>
+
+<%= for entry <- @uploads.document.entries do %>
+  <article class="upload-entry">
+
+    <figure>
+      <%# Phoenix.LiveView.Helpers.live_img_preview/2 renders a client-side preview %>
+      <%= live_img_preview entry %>
+      <figcaption><%= entry.client_name %></figcaption>
+    </figure>
+
+    <%# entry.progress will update automatically for in-flight entries %>
+    <progress value={entry.progress} max="100"> <%= entry.progress %>% </progress>
+
+    <%# a regular click event whose handler will invoke Phoenix.LiveView.cancel_upload/3 %>
+    <button phx-click="cancel-upload" phx-value-ref={entry.ref} aria-label="cancel">&times;</button>
+
+    <%# Phoenix.LiveView.Helpers.upload_errors/2 returns a list of error atoms %>
+    <%= for err <- upload_errors(@uploads.document, entry) do %>
+      <p class="alert alert-danger"><%= error_to_string(err) %></p>
+    <% end %>
+
+  </article>
+<% end %>
+
+<%# Phoenix.LiveView.Helpers.upload_errors/1 returns a list of error atoms %>
+<%= for err <- upload_errors(@uploads.document) do %>
+  <p class="alert alert-danger"><%= error_to_string(err) %></p>
+<% end %>
+
+</section>
+
 <span><%= live_patch "Edit", to: Routes.details_path(@socket, :edit, @transaction), class: "button" %></span> |
 <span><%= live_redirect "Back", to: Routes.movements_path(@socket, :index) %></span>
