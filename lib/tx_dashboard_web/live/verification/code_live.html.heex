@@ -5,5 +5,9 @@
 </div>
 <h1>|</h1>
 <div>
-  <input type="text" name="code" phx-keyup="capture" style="color: white;">
+  <input id="code" type="text" name="code" phx-keyup="capture">
+  <button id="copy_preview" phx-hook="CopyPreview" type="button">
+    Copy
+  </button>
+
 </div>
