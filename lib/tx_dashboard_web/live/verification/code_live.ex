@@ -16,4 +16,10 @@ defmodule TxDashboardWeb.Verification.CodeLive do
   def handle_event("a_digit", _params, socket) do
     {:noreply, socket}
   end
+
+  @impl true
+  def handle_event("get_text", _params, socket) do
+    random = Enum.random(111_111..999_999)
+    {:noreply, push_event(socket, "receive_text", %{number: random})}
+  end
 end
